@@ -17,8 +17,7 @@ const camera = new THREE.PerspectiveCamera(45, canvas.width / canvas.height, 0.1
 
 // 3.1 Configurar mesh.
 //const geo = new THREE.TorusKnotGeometry(1, 0.35, 128, 5, 2);
- const geo = new THREE.SphereGeometry(1.5, 128, 128);
-
+const geo = new THREE.IcosahedronGeometry(1.5, 2);
 const material = new THREE.MeshStandardMaterial({
     color: "#ffffff",
     //wireframe: true,
@@ -68,12 +67,12 @@ const loader = new THREE.TextureLoader(manager);
 
 // 3. Cargamos texturas guardadas en el folder del proyecto.
 const tex = {
-   albedo: loader.load('./assets/texturas/bricks/albedo.png'),
-   ao: loader.load('./assets/texturas/bricks/ao.png'),
-   metalness: loader.load('./assets/texturas/bricks/metallic.png'),
-   normal: loader.load('./assets/texturas/bricks/normal.png'),
-   roughness: loader.load('./assets/texturas/bricks/roughness.png'),
-   displacement: loader.load('./assets/texturas/bricks/displacement.png'),
+   albedo: loader.load('./assets/texturas/carpet/albedo.png'),
+   ao: loader.load('./assets/texturas/carpet/ao.png'),
+   metalness: loader.load('./assets/texturas/carpet/metallic.png'),
+   normal: loader.load('./assets/texturas/carpet/normal.png'),
+   roughness: loader.load('./assets/texturas/carpet/roughness.png'),
+   displacement: loader.load('./assets/texturas/carpet/height.png'),
 };
 
 // 4. Definimos variables y la función que va a crear el material al cargar las texturas.
