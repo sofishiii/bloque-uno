@@ -47,6 +47,37 @@ footer {
     mix-blend-mode: luminosity;
 }
 
+.botones {
+    position: absolute;
+    bottom: 20vh;
+    left: 2vh;
+    display: flex;
+    gap: 2vh;
+}
+
+button {
+    width: 10vh;
+    height: 10vh;
+    border: none;
+    cursor: pointer;
+    font-size: 2vh;
+    font-weight: bold;
+    color: black;
+    transition: transform 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+button.blue {
+    background-color: blue;
+}
+
+button.yellow {
+    background-color: yellow;
+}
+
 .subtitle {
     position: relative;
     padding: 2vh 0 0 2vh;
