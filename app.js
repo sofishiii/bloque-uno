@@ -86,7 +86,7 @@ function createMaterial() {
        normalMap: tex.normal,
        roughnessMap: tex.roughness,
        displacementMap: tex.displacement,
-       displacementScale: 1,
+       displacementScale: 0.15,
        side: THREE.FrontSide,
        // wireframe: true,
    });
@@ -171,7 +171,23 @@ var mouse = {
 
 ///////// FIN DE LA CLASE.
 
+///////// D) Interacción con click para escalar el mesh.
 
+// 1. Contador de escala (inicial en 1).
+let currentScale = 1;
+
+// 2. Agrega un event listener al canvas, no a la ventana.
+canvas.addEventListener("click", () => {
+    currentScale += 0.2; // Aumenta el tamaño un 20% en cada clic
+
+    gsap.to(mesh.scale, {
+        x: currentScale,
+        y: currentScale,
+        z: currentScale,
+        duration: 1,
+        ease: "bounce.out"
+    });
+});
 
 
 
