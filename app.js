@@ -94,7 +94,18 @@ function createMaterial() {
    mesh.material = pbrMaterial;
 }
 
+let isWireframeActive = false;
 
+window.addEventListener("keydown", function (event) {
+    if (event.key === "w" || event.key === "W") {
+        isWireframeActive = !isWireframeActive;
+
+        if (mesh.material) {
+            mesh.material.wireframe = isWireframeActive;
+            console.log(`Wireframe: ${isWireframeActive ? "Activado" : "Desactivado"}`);
+        }
+    }
+});
 
 //// B) Rotación al scrollear.
 // 1. Crear un objeto con la data referente al SCROLL para ocuparla en todos lados.
