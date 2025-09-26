@@ -12,7 +12,7 @@ canvas.height = window.innerHeight;
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({ canvas: canvas });
 renderer.setSize(canvas.width, canvas.height);
-renderer.setClearColor("#0a0c2c");
+renderer.setClearColor("#000000");
 const camera = new THREE.PerspectiveCamera(45, canvas.width / canvas.height, 0.1, 1000);
 
 // 3.1 Configurar mesh.
@@ -26,12 +26,13 @@ const mesh = new THREE.Mesh(geo, material);
 scene.add(mesh);
 mesh.position.z = -7;
 
+
 // 3.2 Crear luces.
-const frontLight = new THREE.PointLight("#ffffff", 300, 100);
+const frontLight = new THREE.PointLight("#FFDDA1", 300, 100);
 frontLight.position.set(7, 3, 3);
 scene.add(frontLight);
 
-const rimLight = new THREE.PointLight("#0066ff", 50, 100);
+const rimLight = new THREE.PointLight("#9DB5B2", 50, 100);
 rimLight.position.set(-7, -3, -7);
 scene.add(rimLight);
 
@@ -66,7 +67,7 @@ manager.onError = function (url) {
 const loader = new THREE.TextureLoader(manager);
 
 // 3. Cargamos texturas guardadas en el folder del proyecto.
-const tex = {
+const carpetTexture = {
    albedo: loader.load('./assets/texturas/carpet/albedo.png'),
    ao: loader.load('./assets/texturas/carpet/ao.png'),
    metalness: loader.load('./assets/texturas/carpet/metallic.png'),
@@ -75,17 +76,34 @@ const tex = {
    displacement: loader.load('./assets/texturas/carpet/height.png'),
 };
 
-// 4. Definimos variables y la función que va a crear el material al cargar las texturas.
-var pbrMaterial;
+const bricksTexture = {
+   albedo: loader.load('./assets/texturas/bricks/albedo.png'),
+   ao: loader.load('./assets/texturas/bricks/ao.png'),
+   metalness: loader.load('./assets/texturas/bricks/metallic.png'),
+   normal: loader.load('./assets/texturas/bricks/normal.png'),
+   roughness: loader.load('./assets/texturas/bricks/roughness.png'),
+   displacement: loader.load('./assets/texturas/bricks/displacement.png'),
+};
 
+const rustedTextures = {
+   albedo: loader.load('./assets/texturas/rusted/albedo.png'),
+   metalness: loader.load('./assets/texturas/rusted/metallic.png'),
+   normal: loader.load('./assets/texturas/rusted/normal.png'),
+   roughness: loader.load('./assets/texturas/rusted/roughness.png'),
+};
+
+
+
+// 4. Definimos variables y la función que va a crear el material al cargar las texturas.
+var carpetMaterial;
 function createMaterial() {
-   pbrMaterial = new THREE.MeshStandardMaterial({
-       map: tex.albedo,
-       aoMap: tex.ao,
-       metalnessMap: tex.metalness,
-       normalMap: tex.normal,
-       roughnessMap: tex.roughness,
-       displacementMap: tex.displacement,
+   carpetMaterial = new THREE.MeshStandardMaterial({
+       map: carpetTexture.albedo,
+       aoMap: carpetTexture.ao,
+       metalnessMap: carpetTexture.metalness,
+       normalMap: carpetTexture.normal,
+       roughnessMap: carpetTexture.roughness,
+       displacementMap: carpetTexture.displacement,
        displacementScale: 0.15,
        side: THREE.FrontSide,
        // wireframe: true,
@@ -93,6 +111,33 @@ function createMaterial() {
 
    mesh.material = pbrMaterial;
 }
+
+var bricksMaterial;
+function createMaterial() {
+   bricksMaterial = new THREE.MeshStandardMaterial({
+       map: brickTexture.albedo,
+       aoMap: brickTexture.ao,
+       metalnessMap: brickTexture.metalness,
+       normalMap: brickTexture.normal,
+       roughnessMap: brickTexture.roughness,
+       displacementMap: brickTexture.displacement,
+   });
+   mesh.material = bricksMaterial;
+}
+
+ var  rustedMaterial = new THREE.MeshStandardMaterial({
+       map: rustedTextures.albedo,
+       metalnessMap: rustedTextures.metalness,
+       normalMap: rustedTextures.normal,
+       roughnessMap: rustedTextures.roughness,
+       metalness: 1,
+       roughness: 1,
+       side: THREE.DoubleSide,
+       // wireframe: true,
+   });
+
+mesh.material = rustedMaterial;
+
 
 let isWireframeActive = false;
 
@@ -171,12 +216,21 @@ var mouse = {
     mouse.normalOffset.y = ( (mouse.y - windowCenter.y) / canvas.height ) * 2;
  }
  
+ // a) Suavizar movimiento de cámara.
+// 1. Incrementar gradualmente el valor de la distancia que vamos a usar para animar y lo guardamos en otro atributo. (en el loop de animación)
+
+function lerpDistanceToCenter() {
+   mouse.lerpNormalOffset.x += (mouse.normalOffset.x - mouse.lerpNormalOffset.x) * mouse.cof;
+   mouse.lerpNormalOffset.y += (mouse.normalOffset.y - mouse.lerpNormalOffset.y) * mouse.cof;
+}
+
+
  window.addEventListener("mousemove", updateMouseData);
 
 
  function updateCameraPosition() {
-    camera.position.x = mouse.normalOffset.x * mouse.gazeRange.x;
-    camera.position.y = -mouse.normalOffset.y * mouse.gazeRange.y;
+    camera.position.x = mouse.lerpNormalOffset.x * mouse.gazeRange.x;
+    camera.position.y = -mouse.lerpNormalOffset.y * mouse.gazeRange.y;
  }
   
 
@@ -209,9 +263,10 @@ function animate() {
     lerpScrollY()
    // mesh.rotation.x -= 0.005;
     updateMeshRotation();
+    lerpDistanceToCenter();
     updateCameraPosition();
     camera.lookAt(mesh.position);
     renderer.render(scene, camera);
 }
 
-animate();
+animate()

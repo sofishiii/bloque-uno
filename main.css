@@ -9,7 +9,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Formula", sans-serif;
+    font-family: "Bitcount Single Ink", system-ui;
     text-transform: uppercase;
     color: aqua;
 }
@@ -68,14 +68,19 @@ button {
 
 button:hover {
     transform: scale(1.1);
+    background-color: bisque;
 }
 
-button.blue {
-    background-color: blue;
+#carpetButton {
+    background-image: url(./assets/texturas/carpet/albedo.png);
 }
 
-button.yellow {
-    background-color: yellow;
+#bricksButton {
+    background-image: url(./assets/texturas/bricks/albedo.png);
+}
+
+#rustedButton {
+    background-image: url(./assets/texturas/rusted/albedo.png);
 }
 
 .subtitle {
