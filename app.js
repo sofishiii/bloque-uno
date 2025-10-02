@@ -269,4 +269,48 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-animate()
+animate();
+
+// === CAMBIO DE TEXTURAS CON BOTONES ===
+const carpetBtn = document.getElementById("carpetButton");
+const bricksBtn = document.getElementById("bricksButton");
+const rustedBtn = document.getElementById("rustedButton");
+
+// Listener para cambiar a textura Carpet
+carpetBtn.addEventListener("click", () => {
+    mesh.material = new THREE.MeshStandardMaterial({
+        map: carpetTexture.albedo,
+        aoMap: carpetTexture.ao,
+        metalnessMap: carpetTexture.metalness,
+        normalMap: carpetTexture.normal,
+        roughnessMap: carpetTexture.roughness,
+        displacementMap: carpetTexture.displacement,
+        displacementScale: 0.15,
+    });
+});
+
+// Listener para cambiar a textura Bricks
+bricksBtn.addEventListener("click", () => {
+    mesh.material = new THREE.MeshStandardMaterial({
+        map: bricksTexture.albedo,
+        aoMap: bricksTexture.ao,
+        metalnessMap: bricksTexture.metalness,
+        normalMap: bricksTexture.normal,
+        roughnessMap: bricksTexture.roughness,
+        displacementMap: bricksTexture.displacement,
+        displacementScale: 0.15,
+    });
+});
+
+// Listener para cambiar a textura Rusted
+rustedBtn.addEventListener("click", () => {
+    mesh.material = new THREE.MeshStandardMaterial({
+        map: rustedTextures.albedo,
+        metalnessMap: rustedTextures.metalness,
+        normalMap: rustedTextures.normal,
+        roughnessMap: rustedTextures.roughness,
+        metalness: 1,
+        roughness: 1,
+        side: THREE.DoubleSide,
+    });
+});

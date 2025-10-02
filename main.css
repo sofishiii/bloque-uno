@@ -1,3 +1,4 @@
+
 @font-face {
   font-family: "Formula";
   src:
@@ -94,4 +95,94 @@ button:hover {
     bottom: 5vh;
     right: 2.2vh;
     width: 10vh;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Orbitron", sans-serif;
+    text-transform: uppercase;
+}
+
+#lienzo {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("./assets/bg-futuristic.jpg") no-repeat center center/cover;
+}
+
+/* Colores intensos */
+.title, .subtitle {
+    color: #FFD700; /* amarillo */
+}
+.info-title, .author, .links {
+    color: #B983FF; /* morado */
+}
+
+/* Botones en columna */
+.botones {
+    position: absolute;
+    top: 20vh;
+    left: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+button {
+    width: 10vh;
+    height: 10vh;
+    border: none;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 10px;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #FFD700;
+}
+
+/* Panel de instrucciones */
+.info-panel {
+    position: absolute;
+    top: 15vh;
+    right: 5vh;
+    width: 25%;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2vh;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+}
+
+.info-title {
+    font-size: 2.2vh;
+    margin-bottom: 1vh;
+}
+
+ul {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.8vh;
+    margin-bottom: 2vh;
+    list-style: none;
+    padding-left: 0;
+    line-height: 1.6;
+    color: #fff;
+}
+
+.author {
+    font-size: 2vh;
+    font-weight: bold;
+}
+
+.links a {
+    color: #FFD700;
+    text-decoration: none;
+}
+.links a:hover {
+    text-decoration: underline;
 }
