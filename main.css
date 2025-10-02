@@ -10,7 +10,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Bitcount Single Ink", system-ui;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, system-ui;
     text-transform: uppercase;
     color: aqua;
 }
@@ -24,22 +24,28 @@
 }
 
 header {
-    position: absolute;
-    top: 0; left: 0;
-    padding: 2vh;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.title {
     position: relative;
-    text-align: right;
-    font-size: 4vh;
-    font-weight: lighter;
-    -webkit-font-smoothing: antialiased;
-    font-smooth: always;
-}
+    z-index: 10;
+    text-align: center;
+    margin-top: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    pointer-events: none; /* evita que bloquee clicks en el canvas */
+  }
+  header h1 {
+    font-size: 3rem;
+    color: #FFD700; /* amarillo intenso */
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  
+  header h2 {
+    font-size: 1.2rem;
+    color: #B266FF; /* morado */
+    margin-top: 5px;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
 
 footer {
     position: absolute;
@@ -101,7 +107,7 @@ button:hover {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Orbitron", sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-transform: uppercase;
 }
 
