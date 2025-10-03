@@ -15,13 +15,27 @@
     color: rgb(220, 220, 154);
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    overflow: auto; /* permite scroll */
+    font-family: 'Poppins', sans-serif;
+  
+    background-image: url("./assets/fondito.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-attachment: fixed; /* para que se note el desplazamiento */
+  }
+
+  
 #lienzo {
     position: fixed;
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background-color: blue;
 }
+
 
 .botones {
     position: absolute;
