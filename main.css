@@ -12,7 +12,7 @@
     box-sizing: border-box;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, system-ui;
     text-transform: uppercase;
-    color: aqua;
+    color: rgb(220, 220, 154);
 }
 
 #lienzo {
@@ -20,38 +20,7 @@
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background-color: #2020cc;
-}
-
-header {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    margin-top: 20px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    pointer-events: none; /* evita que bloquee clicks en el canvas */
-  }
-  header h1 {
-    font-size: 3rem;
-    color: #FFD700; /* amarillo intenso */
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: 2px;
-  }
-  
-  header h2 {
-    font-size: 1.2rem;
-    color: #B266FF; /* morado */
-    margin-top: 5px;
-    font-weight: 400;
-    letter-spacing: 1px;
-  }
-
-footer {
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%;
-    mix-blend-mode: luminosity;
+    background-color: blue;
 }
 
 .botones {
@@ -90,105 +59,96 @@ button:hover {
     background-image: url(./assets/texturas/rusted/albedo.png);
 }
 
-.subtitle {
-    position: relative;
-    padding: 2vh 0 0 2vh;
-    font-size: 14vh;
-}
-
 #centroLogo {
     position: absolute;
     bottom: 5vh;
     right: 2.2vh;
     width: 10vh;
 }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    text-transform: uppercase;
-}
-
-#lienzo {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: url("./assets/bg-futuristic.jpg") no-repeat center center/cover;
-}
-
-/* Colores intensos */
-.title, .subtitle {
-    color: #FFD700; /* amarillo */
-}
-.info-title, .author, .links {
-    color: #B983FF; /* morado */
-}
-
-/* Botones en columna */
-.botones {
+/* HEADER */
+header {
     position: absolute;
-    top: 20vh;
-    left: 2vh;
+    top: 3vh;
+    left: 3vh;
+    z-index: 10;
+    text-align: left;
+    font-family: "Orbitron", sans-serif;
+    pointer-events: none;
+  }
+  
+  .header-top {
     display: flex;
-    flex-direction: column;
+    align-items: baseline;
+    gap: 3vh;
+  }
+  
+  header .main-title {
+    font-size: 14vh;
+    font-weight: 900;
+    color: #956bbf; /* morado */
+    margin: 0;
+    line-height: 0.9;
+    pointer-events: auto;
+  }
+  
+  header .subtitle {
+    font-size: 5vh;
+    font-weight: 800;
+    color: rgb(220, 220, 154);
+    margin: 1vh 0 0 0;
+  }
+  
+  header .date {
+    font-size: 2vh;
+    font-weight: 500;
+    color: #837063; 
+    margin-top: 1vh;
+  }
+  
+  /* LINKS IG + GITHUB */
+  .social-links {
+    display: flex;
     gap: 2vh;
-}
-
-button {
-    width: 10vh;
-    height: 10vh;
-    border: none;
-    cursor: pointer;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border-radius: 10px;
-}
-
-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px #FFD700;
-}
-
-/* Panel de instrucciones */
-.info-panel {
+    pointer-events: auto;
+  }
+  
+  .social-links a {
+    font-size: 2vh;
+    font-weight: 600;
+    color: rgb(220, 220, 154);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    margin-left: -1vh;
+  }
+  
+  .social-links a:hover {
+    color: #956bbf;
+  }
+  
+  /* PANEL INTERACCIONES */
+  .info-panel {
     position: absolute;
-    top: 15vh;
-    right: 5vh;
+    bottom: 10vh;
+    left: 3vh;
     width: 25%;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 2vh;
-    border-radius: 12px;
-    backdrop-filter: blur(6px);
-}
-
-.info-title {
-    font-size: 2.2vh;
-    margin-bottom: 1vh;
-}
-
-ul {
+    z-index: 10;
+    background: none;
+    padding: 0;
     font-family: "Poppins", sans-serif;
+  }
+  
+  .info-title {
+    font-size: 2.5vh;
+    margin-bottom: 1vh;
+    color: #956bbf;
+    font-weight: 700;
+  }
+  
+  .info-panel ul {
     font-size: 1.8vh;
-    margin-bottom: 2vh;
+    line-height: 1.8;
     list-style: none;
     padding-left: 0;
-    line-height: 1.6;
-    color: #fff;
-}
-
-.author {
-    font-size: 2vh;
-    font-weight: bold;
-}
-
-.links a {
-    color: #FFD700;
-    text-decoration: none;
-}
-.links a:hover {
-    text-decoration: underline;
-}
+    margin: 0;
+    color: #FFD700; /* amarillo */
+  }
