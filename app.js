@@ -66,6 +66,9 @@ manager.onError = function (url) {
 // 2. "Texture loader" para nuestros assets.
 const loader = new THREE.TextureLoader(manager);
 
+const cubeTexLoader = new THREE.CubeTextureLoader(manager);
+
+
 // 3. Cargamos texturas guardadas en el folder del proyecto.
 const carpetTexture = {
    albedo: loader.load('./assets/texturas/carpet/albedo.png'),
@@ -92,6 +95,14 @@ const rustedTextures = {
    roughness: loader.load('./assets/texturas/rusted/roughness.png'),
 };
 
+
+const envMap = cubeTexLoader.load([
+   './assets/texturas/environment/posx.jpg', './assets/texturas/environment/negx.jpg',   // +X, -X
+   './assets/texturas/environment/posy.jpg', './assets/texturas/environment/negy.jpg',   // +Y, -Y
+   './assets/texturas/environment/posz.jpg', './assets/texturas/environment/negz.jpg'    // +Z, -Z
+]);
+
+scene.background = envMap;
 
 
 // 4. Definimos variables y la función que va a crear el material al cargar las texturas.
@@ -126,6 +137,9 @@ function createMaterial() {
 }
 
  var  rustedMaterial = new THREE.MeshStandardMaterial({
+       envMap: envMap,
+       metalness: 5,
+       roughness: 0.4,
        map: rustedTextures.albedo,
        metalnessMap: rustedTextures.metalness,
        normalMap: rustedTextures.normal,
@@ -133,6 +147,7 @@ function createMaterial() {
        metalness: 1,
        roughness: 1,
        side: THREE.DoubleSide,
+       color: "#000000",
        // wireframe: true,
    });
 
@@ -314,3 +329,28 @@ rustedBtn.addEventListener("click", () => {
         side: THREE.DoubleSide,
     });
 });
+
+function updateCanvasSize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+ } 
+
+function updateRenderer() {
+    renderer.setSize(canvas.width, canvas.height);
+ 
+    // actualizar pixel ratio (para pantallas retina, pero limitar a 2 para rendimiento)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+ }
+
+function updateCameraAspect() {
+    camera.aspect = canvas.width / canvas.height;
+    camera.updateProjectionMatrix();
+ }
+
+ window.addEventListener("resize", function() {
+    updateCanvasSize();
+    updateRenderer();
+    updateCameraAspect();
+ });
+ 
+ 
